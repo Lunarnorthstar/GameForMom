@@ -1930,6 +1930,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateSensitivity: 2
+  dropSpeed: 1
   invertRotation: 1
 --- !u!43 &154543896
 Mesh:
@@ -2101,7 +2102,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1830
+  m_Name: pb_Mesh17338
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3334,6 +3335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateSensitivity: 2
+  dropSpeed: 0
   invertRotation: 1
 --- !u!1 &1189271373
 GameObject:
