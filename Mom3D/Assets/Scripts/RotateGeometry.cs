@@ -20,15 +20,17 @@ public class RotateGeometry : MonoBehaviour
 
     [SerializeField] private Boolean invertRotation = true; //Controls whether the rotation of Object is "inverted" or not
     private int mult = 1; //And this actually multiplies the value
-    
+
     Random randomRotation = new Random();
-   
+
+    public Rigidbody rB;
+
 
     private void Start()
     {
         randOffset = randomRotation.Next(0, 180); //Generate a random number to use as a starting offset
 
-
+        rB = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -41,13 +43,13 @@ public class RotateGeometry : MonoBehaviour
         {
             mult = -1;
         }
-        
-        
+
+
         objectX += Input.GetAxis("Mouse X"); //Apply horizontal mouse movements to a variable
         objectY += Input.GetAxis("Mouse Y"); //Apply vertical mouse movements to a variable
 
         objectRotation = Quaternion.Euler(objectY * (-rotateSensitivity * mult) + randOffset, objectX * (rotateSensitivity * mult) + randOffset, 1); //Apply said changes to the quaternion... (plus starting offset)
-        
+
         transform.rotation = new Quaternion(objectRotation.x, objectRotation.y, objectRotation.z, 0); //...And apply the quaternion to the transform.
 
         objectMoving();
@@ -55,7 +57,7 @@ public class RotateGeometry : MonoBehaviour
 
     void objectMoving()
     {
-        dropOffset -= (dropSpeed / 4) * Time.deltaTime; //Passively reduce the offset - the amount Object has been lowered. This means if it's not descending it will move upwards back to the original position.
+        /*dropOffset -= (dropSpeed / 4) * Time.deltaTime; //Passively reduce the offset - the amount Object has been lowered. This means if it's not descending it will move upwards back to the original position.
         if (dropOffset < 0)
         {
             dropOffset = 0; //This if statement prevents Object from rising above the original position.
@@ -67,6 +69,22 @@ public class RotateGeometry : MonoBehaviour
         }
         
         
-        transform.position = new Vector3(transform.position.x, -2 - dropOffset, transform.position.z); //Apply the changes. Note the hardcoded static starting value is to prevent acceleration. It may need to be changed.
+        transform.position = new Vector3(transform.position.x, -2 - dropOffset, transform.position.z); //Apply the changes. Note the hardcoded static starting value is to prevent acceleration. It may need to be changed.*/
+
+        if (dropOffset < 0)
+        {
+            dropOffset = 0; //This if statement prevents Object from rising above the original position.
+        }
+
+        if (Input.GetKey(KeyCode.Q)) //When the Q key is pressed...
+        {
+            rB.AddForce(0, -dropSpeed * Time.deltaTime, 0); //Start increasing the drop offset. This lowers the object.
+        }
+
+
+        if (Input.GetKeyUp(KeyCode.Q))
+        {
+            transform.position = new Vector3(transform.position.x, -2, transform.position.z);
+        } 
     }
 }
