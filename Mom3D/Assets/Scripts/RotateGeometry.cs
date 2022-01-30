@@ -6,31 +6,34 @@ using UnityEngine;
 using Random = System.Random;
 
 //Script is applied to the object to be rotated, "Object"
+//Dependencies (Components); Rigidbody (not kinematic)
+//Dependencies (Scene); Requires the starting position of the object to be at (0, -2, 0) (or another uniform position across all scenes, in which case the values will need to be changed)
 public class RotateGeometry : MonoBehaviour
 {
     private Quaternion objectRotation; //Stores the desired angle of Object
+    private float randOffset; //Stores a random offset for Object to start at.
 
     public float rotateSensitivity = 1; //Controls how fast Object turns
 
     private float objectX, objectY; //These variables store the movements of the mouse on the X and Y axes, respectively
-    private float randOffset; //Stores a random offset for Object to start at.
+
 
     private float dropOffset; //The amount the object has dropped
     public float dropSpeed = 1; //The rate at which the object approaches the hole
-
     [SerializeField] private Boolean invertRotation = true; //Controls whether the rotation of Object is "inverted" or not
     private int mult = 1; //And this actually multiplies the value
+    public float xShiftPos = 3; //The X position Object will move to when shifted
 
-    Random randomRotation = new Random();
+    Random randomRotation = new Random(); //Generates a random number, used for the starting rotation of the object
 
-    public Rigidbody rB;
+    public Rigidbody rB; //The object's rigidbody component
 
 
     private void Start()
     {
         randOffset = randomRotation.Next(0, 180); //Generate a random number to use as a starting offset
 
-        rB = GetComponent<Rigidbody>();
+        rB = GetComponent<Rigidbody>(); //Get the rigidbody component
     }
 
     void Update()
@@ -70,21 +73,27 @@ public class RotateGeometry : MonoBehaviour
         
         
         transform.position = new Vector3(transform.position.x, -2 - dropOffset, transform.position.z); //Apply the changes. Note the hardcoded static starting value is to prevent acceleration. It may need to be changed.*/
+        //~~~~~~ The above is a legacy movement option that didn't work out with the colliders, it's only here for emergencies. ~~~~~
 
-        if (dropOffset < 0)
+        if (Input.GetKey(KeyCode.DownArrow)) //When the Q key is pressed...
         {
-            dropOffset = 0; //This if statement prevents Object from rising above the original position.
+            rB.AddForce(0, -dropSpeed * Time.deltaTime, 0); //Start adding force to Object's rigidbody
         }
 
-        if (Input.GetKey(KeyCode.Q)) //When the Q key is pressed...
+        if (Input.GetKeyUp(KeyCode.DownArrow))
         {
-            rB.AddForce(0, -dropSpeed * Time.deltaTime, 0); //Start increasing the drop offset. This lowers the object.
+            transform.position = new Vector3(0, -2, 0); //When the move key is released, set the position back to the default.
+            rB.velocity = Vector3.zero; //And reset the velocity too.
         }
 
-
-        if (Input.GetKeyUp(KeyCode.Q))
+        if (Input.GetKey(KeyCode.UpArrow))
         {
-            transform.position = new Vector3(transform.position.x, -2, transform.position.z);
-        } 
+            transform.position = new Vector3(Mathf.Lerp(transform.position.x, xShiftPos, 0.1f), -2, 0);
+        }
+
+        if (Input.GetKeyUp(KeyCode.UpArrow))
+        {
+            transform.position = new Vector3(0, -2, 0);
+        }
     }
 }
