@@ -83,7 +83,7 @@ public class RotateGeometry : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.DownArrow))
         {
             transform.position = new Vector3(0, -2, 0); //When the move key is released, set the position back to the default.
-            rB.velocity = Vector3.zero; //And reset the velocity too.
+            rB.velocity = new Vector3(0, 0, 0); //And reset the velocity too.
         }
 
         if (Input.GetKey(KeyCode.UpArrow))
