@@ -51,9 +51,10 @@ public class RotateGeometry : MonoBehaviour
         objectX += Input.GetAxis("Mouse X"); //Apply horizontal mouse movements to a variable
         objectY += Input.GetAxis("Mouse Y"); //Apply vertical mouse movements to a variable
 
-        objectRotation = Quaternion.Euler(objectY * (-rotateSensitivity * mult) + randOffset, objectX * (rotateSensitivity * mult) + randOffset, 1); //Apply said changes to the quaternion... (plus starting offset)
+        objectRotation = Quaternion.Euler(objectX * (-rotateSensitivity * mult) + randOffset, 1, objectY * (rotateSensitivity * mult) + randOffset); //Apply said changes to the quaternion... (plus starting offset)
 
-        transform.rotation = new Quaternion(objectRotation.x, objectRotation.y, objectRotation.z, 0); //...And apply the quaternion to the transform.
+        transform.rotation = objectRotation;
+            //new Quaternion(objectRotation.x, objectRotation.y, objectRotation.z, 0); //...And apply the quaternion to the transform.
 
         objectMoving();
     }
