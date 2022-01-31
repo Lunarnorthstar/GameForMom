@@ -129,11 +129,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
   m_Name: pb_Mesh19110
-=======
-  m_Name: pb_Mesh19524
->>>>>>> Stashed changes
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2800,13 +2796,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9fe4abf88f4aef4cb47243a8bd42e45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
   rotateSensitivity: 2
   dropSpeed: 20
-=======
-  rotateSensitivity: 4
-  dropSpeed: 50
->>>>>>> Stashed changes
   invertRotation: 1
   xShiftPos: 3
   rB: {fileID: 1396436073}

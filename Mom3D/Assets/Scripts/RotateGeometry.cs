@@ -15,7 +15,7 @@ public class RotateGeometry : MonoBehaviour
 
     public float rotateSensitivity = 1; //Controls how fast Object turns
 
-    private float objectX, objectY, yaw; //These variables store the movements of the mouse on the X and Y axes, respectively, along with the third axis value
+    private float objectX, objectY; //These variables store the movements of the mouse on the X and Y axes, respectively
 
 
     private float dropOffset; //The amount the object has dropped
@@ -47,16 +47,11 @@ public class RotateGeometry : MonoBehaviour
             mult = -1;
         }
 
-        if (Input.GetKey(KeyCode.Space))
-        {
-            yaw += rotateSensitivity * 10 * Time.deltaTime;
-        }
-
 
         objectX += Input.GetAxis("Mouse X"); //Apply horizontal mouse movements to a variable
         objectY += Input.GetAxis("Mouse Y"); //Apply vertical mouse movements to a variable
 
-        objectRotation = Quaternion.Euler(objectY * (-rotateSensitivity * mult) + randOffset, yaw, objectX * (rotateSensitivity * mult) + randOffset); //Apply said changes to the quaternion... (plus starting offset)
+        objectRotation = Quaternion.Euler(objectX * (-rotateSensitivity * mult) + randOffset, 1, objectY * (rotateSensitivity * mult) + randOffset); //Apply said changes to the quaternion... (plus starting offset)
 
         transform.rotation = objectRotation;
             //new Quaternion(objectRotation.x, objectRotation.y, objectRotation.z, 0); //...And apply the quaternion to the transform.
