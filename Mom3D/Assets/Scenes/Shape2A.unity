@@ -222,7 +222,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh20238
+  m_Name: pb_Mesh18670
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3054,11 +3054,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9fe4abf88f4aef4cb47243a8bd42e45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateSensitivity: 1
-  dropSpeed: 1
+  rotateSensitivity: 2
+  dropSpeed: 20
   invertRotation: 1
   xShiftPos: 3
-  rB: {fileID: 0}
+  rB: {fileID: 1462479743}
 --- !u!43 &1568078106
 Mesh:
   m_ObjectHideFlags: 0

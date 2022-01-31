@@ -11,4 +11,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Shape2.unity
     guid: 88ac4a2bad1ba27418eb12b66a9036bf
+  - enabled: 1
+    path: Assets/Scenes/Shape2A.unity
+    guid: bfee30ddd95fb864c87161544918550f
+  - enabled: 1
+    path: Assets/Scenes/Shape1A.unity
+    guid: f919ea8f2c7d1354f84571569b7f6870
+  - enabled: 1
+    path: Assets/Scenes/Shape3.unity
+    guid: 837d4e277cbd8e444a7ad3dd2312139c
+  - enabled: 1
+    path: Assets/Scenes/Shape3A.unity
+    guid: ee240866ed9fae04b9060d3a7ff8ca86
   m_configObjects: {}
