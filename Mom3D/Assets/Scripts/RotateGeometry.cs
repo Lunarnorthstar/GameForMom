@@ -38,7 +38,8 @@ public class RotateGeometry : MonoBehaviour
 
     void Update()
     {
-        if (invertRotation)
+        rB.isKinematic = false; //Allow the object to be pushed again
+        if (invertRotation) //This if/else toggles the rotation direction (by multiplying the final number by 1 or -1) based on a setting in the editor.
         {
             mult = 1;
         }
@@ -47,13 +48,13 @@ public class RotateGeometry : MonoBehaviour
             mult = -1;
         }
 
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow)) //While the right arrow is pressed...
         {
-            yaw += rotateSensitivity * 10 * Time.deltaTime;
+            yaw += rotateSensitivity * 10 * Time.deltaTime; //Add to the yaw variable - used to control rotation on the third axis
         }
-        else if (Input.GetKey(KeyCode.LeftArrow))
+        else if (Input.GetKey(KeyCode.LeftArrow)) //Same deal for left arrow.
         {
-            yaw -= rotateSensitivity * 10 * Time.deltaTime;
+            yaw -= rotateSensitivity * 10 * Time.deltaTime; //(But in the other direction of course)
         }
 
 
@@ -93,17 +94,17 @@ public class RotateGeometry : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.DownArrow))
         {
             transform.position = new Vector3(0, -2, 0); //When the move key is released, set the position back to the default.
-            rB.velocity = new Vector3(0, 0, 0); //And reset the velocity too.
+            rB.isKinematic = true; //Prevent the object from moving for the rest of the frame. This is the only way I could find to get it to stop drifting.
         }
 
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow)) //While the up arrow is pressed...
         {
-            transform.position = new Vector3(Mathf.Lerp(transform.position.x, xShiftPos, 0.1f), -2, 0);
+            transform.position = new Vector3(Mathf.Lerp(transform.position.x, xShiftPos, 0.1f), -2, 0); //Lerp to the given position.
         }
 
-        if (Input.GetKeyUp(KeyCode.UpArrow))
+        if (Input.GetKeyUp(KeyCode.UpArrow)) //When the up arrow is released...
         {
-            transform.position = new Vector3(0, -2, 0);
+            transform.position = new Vector3(0, -2, 0); //Return to your original position.
         }
     }
 }
