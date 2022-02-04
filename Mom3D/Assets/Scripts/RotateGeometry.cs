@@ -25,6 +25,7 @@ public class RotateGeometry : MonoBehaviour
     public float xShiftPos = 3; //The X position Object will move to when shifted
 
     Random randomRotation = new Random(); //Generates a random number, used for the starting rotation of the object
+    public bool controlActive = true; //Whether the player is able to control the object.
 
     public Rigidbody rB; //The object's rigidbody component
 
@@ -85,26 +86,32 @@ public class RotateGeometry : MonoBehaviour
         
         transform.position = new Vector3(transform.position.x, -2 - dropOffset, transform.position.z); //Apply the changes. Note the hardcoded static starting value is to prevent acceleration. It may need to be changed.*/
         //~~~~~~ The above is a legacy movement option that didn't work out with the colliders, it's only here for emergencies. ~~~~~
-
-        if (Input.GetKey(KeyCode.DownArrow)) //When the Q key is pressed...
+        if (controlActive)
         {
-            rB.AddForce(0, -dropSpeed * Time.deltaTime, 0); //Start adding force to Object's rigidbody
-        }
+            if (Input.GetKey(KeyCode.DownArrow)) //When the Q key is pressed...
+            {
+                rB.AddForce(0, -dropSpeed * Time.deltaTime, 0); //Start adding force to Object's rigidbody
+            }
 
-        if (Input.GetKeyUp(KeyCode.DownArrow))
-        {
-            transform.position = new Vector3(0, -2, 0); //When the move key is released, set the position back to the default.
-            rB.isKinematic = true; //Prevent the object from moving for the rest of the frame. This is the only way I could find to get it to stop drifting.
-        }
+            if (Input.GetKeyUp(KeyCode.DownArrow))
+            {
+                transform.position = new Vector3(0, -2, 0); //When the move key is released, set the position back to the default.
+                rB.isKinematic = true; //Prevent the object from moving for the rest of the frame. This is the only way I could find to get it to stop drifting.
+            }
 
-        if (Input.GetKey(KeyCode.UpArrow)) //While the up arrow is pressed...
-        {
-            transform.position = new Vector3(Mathf.Lerp(transform.position.x, xShiftPos, 0.1f), -2, 0); //Lerp to the given position.
-        }
+            if (Input.GetKey(KeyCode.UpArrow)) //While the up arrow is pressed...
+            {
+                transform.position = new Vector3(Mathf.Lerp(transform.position.x, xShiftPos, 0.1f), -2, 0); //Lerp to the given position.
+            }
 
-        if (Input.GetKeyUp(KeyCode.UpArrow)) //When the up arrow is released...
-        {
-            transform.position = new Vector3(0, -2, 0); //Return to your original position.
+            if (Input.GetKeyUp(KeyCode.UpArrow)) //When the up arrow is released...
+            {
+                transform.position = new Vector3(0, -2, 0); //Return to your original position.
+            } 
         }
+    }
+    public void stop()
+    {
+        controlActive = false; //Deactivates movement of the object when given a message.
     }
 }

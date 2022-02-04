@@ -24,6 +24,7 @@ public class SceneChange : MonoBehaviour
         {
             visual.enabled = false;
             toTurnOn.SetActive(true);
+            other.SendMessage("stop");
 
             if (timer > 0)
             {
