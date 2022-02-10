@@ -113,5 +113,6 @@ public class RotateGeometry : MonoBehaviour
     public void stop()
     {
         controlActive = false; //Deactivates movement of the object when given a message.
+        rB.isKinematic = true;
     }
 }
